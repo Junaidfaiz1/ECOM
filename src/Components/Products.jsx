@@ -10,6 +10,7 @@ import {
   CardMedia,
   Rating,
 } from "@mui/material";
+
 const productsData = {
   Electronics: [
     {
@@ -18,6 +19,7 @@ const productsData = {
       description: "Latest 5G smartphone",
       image: "https://via.placeholder.com/150",
       rating: 4.5,
+      price: 600,
     },
     {
       id: 2,
@@ -25,6 +27,7 @@ const productsData = {
       description: "Powerful gaming laptop",
       image: "https://via.placeholder.com/150",
       rating: 4.7,
+      price: 1200,
     },
     {
       id: 3,
@@ -32,6 +35,7 @@ const productsData = {
       description: "Track fitness and notifications",
       image: "https://via.placeholder.com/150",
       rating: 4.3,
+      price: 400,
     },
   ],
   Clothing: [
@@ -41,6 +45,7 @@ const productsData = {
       description: "Comfortable cotton t-shirt",
       image: "https://via.placeholder.com/150",
       rating: 4.2,
+      price: 20,
     },
     {
       id: 5,
@@ -48,6 +53,7 @@ const productsData = {
       description: "Stylish blue denim jeans",
       image: "https://via.placeholder.com/150",
       rating: 4.6,
+      price: 50,
     },
     {
       id: 6,
@@ -55,6 +61,7 @@ const productsData = {
       description: "Warm winter jacket",
       image: "https://via.placeholder.com/150",
       rating: 4.8,
+      price: 100,
     },
   ],
   "Home Appliances": [
@@ -64,6 +71,7 @@ const productsData = {
       description: "Energy-efficient refrigerator",
       image: "https://via.placeholder.com/150",
       rating: 4.5,
+      price: 800,
     },
     {
       id: 8,
@@ -71,6 +79,7 @@ const productsData = {
       description: "Compact microwave oven",
       image: "https://via.placeholder.com/150",
       rating: 4.4,
+      price: 150,
     },
     {
       id: 9,
@@ -78,244 +87,111 @@ const productsData = {
       description: "Fully automatic washing machine",
       image: "https://via.placeholder.com/150",
       rating: 4.6,
+      price: 700,
     },
   ],
 };
+
 const Products = () => {
-  const [selectedcategory, Setselectedcategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts =
+    selectedCategory === "All"
+      ? Object.values(productsData).flat()
+      : productsData[selectedCategory] || [];
+
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <Typography
-        varient="h2"
+        variant="h4"
         align="center"
         sx={{ marginBottom: "1.5rem", marginTop: "1rem", fontWeight: 600 }}
       >
         Featured Products
       </Typography>
+
+      {/* Category Buttons */}
       <Box
         display="flex"
-        alignItems="center"
         justifyContent="center"
-        gap={6}
+        gap={2}
         marginBottom={3}
+        flexWrap="wrap"
       >
-        <Button
-          variant="outlined"
-          sx={{
-            backgroundColor: "#E67E22",
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: "#23512a",
-              color: "white",
-            },
-            "&:focus": {
-              backgroundColor: "#1a2e13",
-              color: "#dc11f2",
-            },
-          }}
-        >
-          All
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            backgroundColor: "#E67E22",
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: "#23512a",
-              color: "white",
-            },
-            "&:focus": {
-              backgroundColor: "#1a2e13",
-              color: "#dc11f2",
-            },
-          }}
-        >
-          All
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            backgroundColor: "#E67E22",
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: "#23512a",
-              color: "white",
-            },
-            "&:focus": {
-              backgroundColor: "#1a2e13",
-              color: "#dc11f2",
-            },
-          }}
-        >
-          All
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            backgroundColor: "#E67E22",
-            transition: "0.3s",
-            "&:hover": {
-              backgroundColor: "#23512a",
-              color: "white",
-            },
-            "&:focus": {
-              backgroundColor: "#1a2e13",
-              color: "#dc11f2",
-            },
-          }}
-        >
-          All
-        </Button>
+        {["All", ...Object.keys(productsData)].map((category) => (
+          <Button
+            key={category}
+            variant={selectedCategory === category ? "contained" : "outlined"}
+            onClick={() => handleCategoryChange(category)}
+            sx={{
+              backgroundColor: selectedCategory === category ? "#E67E22" : "",
+              color: selectedCategory === category ? "white" : "black",
+              transition: "0.3s",
+              "&:hover": {
+                backgroundColor: "#23512a",
+                color: "white",
+              },
+            }}
+          >
+            {category}
+          </Button>
+        ))}
       </Box>
 
+      {/* Product Grid */}
       <Grid container spacing={3} justifyContent="center">
-        {/* Product 1 */}
-        <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              transition: "0.3s",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: "5px 5px 15px rgba(0,0,0,0.2)",
-              },
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://via.placeholder.com/150"
-              alt="Smartphone"
-            />
-            <CardContent>
-              <Typography variant="h6" align="center" fontWeight="bold">
-                Smartphone
-              </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Latest 5G smartphone
-              </Typography>
-              <Typography
-                variant="h6"
-                color="primary"
-                align="center"
-                sx={{ marginTop: 1, fontWeight: "bold" }}
-              >
-                $699
-              </Typography>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                marginTop={1}
-              >
-                <Rating value={4.5} precision={0.1} readOnly />
-              </Box>
-              <Box display="flex" justifyContent="center" marginTop={2}>
-                <Button variant="contained" color="primary">
-                  Add to Cart
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Product 2 */}
-        <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              transition: "0.3s",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: "5px 5px 15px rgba(0,0,0,0.2)",
-              },
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://via.placeholder.com/150"
-              alt="Laptop"
-            />
-            <CardContent>
-              <Typography variant="h6" align="center" fontWeight="bold">
-                Laptop
-              </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Powerful gaming laptop
-              </Typography>
-              <Typography
-                variant="h6"
-                color="primary"
-                align="center"
-                sx={{ marginTop: 1, fontWeight: "bold" }}
-              >
-                $1299
-              </Typography>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                marginTop={1}
-              >
-                <Rating value={4.7} precision={0.1} readOnly />
-              </Box>
-              <Box display="flex" justifyContent="center" marginTop={2}>
-                <Button variant="contained" color="primary">
-                  Add to Cart
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        {/* Product 3 */}
-        <Grid item xs={12} sm={4}>
-          <Card
-            sx={{
-              transition: "0.3s",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: "5px 5px 15px rgba(0,0,0,0.2)",
-              },
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://via.placeholder.com/150"
-              alt="Smartwatch"
-            />
-            <CardContent>
-              <Typography variant="h6" align="center" fontWeight="bold">
-                Smartwatch
-              </Typography>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Track fitness and notifications
-              </Typography>
-              <Typography
-                variant="h6"
-                color="primary"
-                align="center"
-                sx={{ marginTop: 1, fontWeight: "bold" }}
-              >
-                $199
-              </Typography>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                marginTop={1}
-              >
-                <Rating value={4.3} precision={0.1} readOnly />
-              </Box>
-              <Box display="flex" justifyContent="center" marginTop={2}>
-                <Button variant="contained" color="primary">
-                  Add to Cart
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+        {filteredProducts.map((product) => (
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <Card
+              sx={{
+                transition: "0.3s",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "5px 5px 15px rgba(0,0,0,0.2)",
+                },
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="160"
+                image={product.image}
+                alt={product.name}
+              />
+              <CardContent>
+                <Typography variant="h6" align="center" fontWeight="bold">
+                  {product.name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
+                >
+                  {product.description}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  color="primary"
+                  align="center"
+                  sx={{ marginTop: 1, fontWeight: "bold" }}
+                >
+                  ${product.price}
+                </Typography>
+                <Box display="flex" justifyContent="center" marginTop={1}>
+                  <Rating value={product.rating} precision={0.1} readOnly />
+                </Box>
+                <Box display="flex" justifyContent="center" marginTop={2}>
+                  <Button variant="contained" color="primary">
+                    Add to Cart
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
