@@ -136,7 +136,6 @@ const Home = () => {
           gap={6}
           sx={{
             color: "white",
-            
           }}
         >
           <Button variant="outline" startIcon={<LocalShippingIcon />}>
