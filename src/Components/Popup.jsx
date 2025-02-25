@@ -7,10 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
-import { addToCart, removeFromCart } from "../Redex-toolkit/AddTOCart";
+import {
+  addToCart,
+  removeFromCart,
+  cleanCart,
+} from "../Redex-toolkit/AddTOCart";
 import { IconButton } from "@mui/material";
 
-const Popup = ({ handleClose, open=false }) => {
+const Popup = ({ handleClose, open = false }) => {
   const product = useSelector((state) => state.cart.cart);
   const totalprice = useSelector((state) => state.cart.totalprice);
   const despatch = useDispatch();
@@ -84,15 +88,18 @@ const Popup = ({ handleClose, open=false }) => {
       </Typography>
       <DialogActions>
         <Button onClick={handleClose}>Back</Button>
-        <Button onClick={()=>{
-          // TODO 
-          const myFunc = ()=>{
-            
-            window.alert("hi");
-          }         
-           myFunc();
-          handleClose();
-        }} autoFocus>
+        <Button
+          onClick={() => {
+            // TODO
+            const myFunc = () => {
+              window.alert("Order Successfull");
+              despatch(cleanCart());
+            };
+            myFunc();
+            handleClose();
+          }}
+          autoFocus
+        >
           Order Now
         </Button>
       </DialogActions>
