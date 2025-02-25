@@ -7,12 +7,22 @@ import {
   AppBar,
   Toolbar,
   Container,
+  IconButton,
 } from "@mui/material";
-import Posterimg from "../assets/about-us-image-3.png";
+import Posterimg from "@/assets/about-us-image-3.png";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Popup from "./Popup";
 const Home = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleDialogOpen = ()=>{
+    setOpen(!open);
+  }
+
+ 
   return (
     <Grid
       sx={{
@@ -55,9 +65,17 @@ const Home = () => {
             <Button color="inherit">About Us</Button>
             <Button color="inherit">Shop</Button>
           </Box>
-          <Button variant="contained" sx={{ backgroundColor: "#E67E22" }}>
-            Shop Now
-          </Button>
+          <IconButton
+            variant="contained"
+            onClick={handleDialogOpen}
+            sx={{
+              backgroundColor: "#E67E22",
+              color: "white",
+            }}
+          >
+            <ShoppingCartIcon fontSize="large" />
+          </IconButton>
+          <Popup open={open} handleClose={handleDialogOpen} />
         </Toolbar>
       </AppBar>
 
@@ -67,7 +85,7 @@ const Home = () => {
         sx={{
           mt: 8,
           position: "relative",
-          zIndex: 1, // Bring hero section to the front
+          zIndex: 1,
         }}
       >
         <Grid container spacing={4} alignItems="center">
@@ -107,7 +125,7 @@ const Home = () => {
               src={Posterimg}
               alt="About Us"
               sx={{
-                width: "100%",
+                width: "95%",
                 maxHeight: "480px",
                 objectFit: "cover",
                 borderRadius: "10px",

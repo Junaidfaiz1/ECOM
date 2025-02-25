@@ -10,13 +10,16 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { addToCart, removeFromCart } from "../Redex-toolkit/AddTOCart";
 import { IconButton } from "@mui/material";
 
-const Popup = ({ handleClose, open }) => {
+const Popup = ({ handleClose, open=false }) => {
   const product = useSelector((state) => state.cart.cart);
   const totalprice = useSelector((state) => state.cart.totalprice);
   const despatch = useDispatch();
   return (
     <Dialog
       open={open}
+      onClose={handleClose}
+      fullWidth="true"
+      maxWidth="lg"
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
@@ -28,34 +31,47 @@ const Popup = ({ handleClose, open }) => {
               <CardContent
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
                 }}
               >
-                <Box>
-                  <Typography variant="h6">{item.name}</Typography>
-                  <Typography>Price: ${item.price}</Typography>
-                  <Box display={"flex"} gap={1} alignItems={"center"}>
-                    <Typography>Quantity: </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: "6px",
+                  }}
+                >
+                  <Typography variant="h6" sx={{ marginRight: "6rem" }}>
+                    {item.name}
+                    {" : "}
+                  </Typography>
+                  <Typography variant="h6" sx={{ marginRight: "6rem" }}>
+                    Price: ${item.price}
+                  </Typography>
+                  <Box display={"flex"} gap={1} sx={{ marginRight: "6rem" }}>
+                    <Typography variant="h6">Quantity: </Typography>
                     <IconButton
                       color="primary"
                       onClick={() => despatch(addToCart(item))}
-                      boxShadow="0px 0px 10px rgba(0, 0, 0, 0.3)"
+                      sx={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
                     >
                       <AddCircleOutlineIcon fontSize="medium" />
                     </IconButton>
 
-                    <Typography>{item.quantity}</Typography>
+                    <Typography variant="h6" sx={{ paddingX: "10px" }}>
+                      {item.quantity}
+                    </Typography>
                     <IconButton
                       color="primary"
                       onClick={() => despatch(removeFromCart(item.id))}
-                      boxShadow="0px 0px 10px rgba(0, 0, 0, 0.3)"
+                      sx={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
                     >
                       <RemoveIcon fontSize="medium" />
                     </IconButton>
                   </Box>
-                  <Typography>
-                    <strong>Total:{item.price * item.quantity}</strong> $
+                  <Typography variant="h6" sx={{ marginRight: "6rem" }}>
+                    Total:{item.price * item.quantity} $
                   </Typography>
                 </Box>
               </CardContent>
@@ -63,12 +79,20 @@ const Popup = ({ handleClose, open }) => {
           </DialogContent>
         </Box>
       ))}
-      <Typography variant="h5">
+      <Typography variant="h5" textAlign="center">
         Total Price: <strong>${totalprice}</strong>
       </Typography>
       <DialogActions>
-        <Button onClick={handleClose}>Cancle Order</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={handleClose}>Back</Button>
+        <Button onClick={()=>{
+          // TODO 
+          const myFunc = ()=>{
+            
+            window.alert("hi");
+          }         
+           myFunc();
+          handleClose();
+        }} autoFocus>
           Order Now
         </Button>
       </DialogActions>
