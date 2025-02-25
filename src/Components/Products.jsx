@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../Redex-toolkit/AddTOCart";
-
+import phone from "../assets/mobile.jpg";
+import laptop from "../assets/laptop.jpg";
+import watch from "../assets/Smartwatch.jpg";
+import cloth from "../assets/Tshirt.jpg";
+import jeans from "../assets/jeans.jpg";
+import jecket from "../assets/jecket.jpg";
+import ovan from "../assets/ovan.jpg";
+import ref from "../assets/ref.jpg";
+import wash from "../assets/wash.jpg";
 import {
   Typography,
   Box,
@@ -20,7 +28,7 @@ const productsData = {
       id: 1,
       name: "Smartphone",
       description: "Latest 5G smartphone",
-      image: "https://via.placeholder.com/150",
+      image: phone,
       rating: 4.5,
       price: 600,
     },
@@ -28,7 +36,7 @@ const productsData = {
       id: 2,
       name: "Laptop",
       description: "Powerful gaming laptop",
-      image: "https://via.placeholder.com/150",
+      image: laptop,
       rating: 4.7,
       price: 1200,
     },
@@ -36,7 +44,7 @@ const productsData = {
       id: 3,
       name: "Smartwatch",
       description: "Track fitness and notifications",
-      image: "https://via.placeholder.com/150",
+      image: watch,
       rating: 4.3,
       price: 400,
     },
@@ -46,7 +54,7 @@ const productsData = {
       id: 4,
       name: "T-Shirt",
       description: "Comfortable cotton t-shirt",
-      image: "https://via.placeholder.com/150",
+      image: cloth,
       rating: 4.2,
       price: 20,
     },
@@ -54,7 +62,7 @@ const productsData = {
       id: 5,
       name: "Jeans",
       description: "Stylish blue denim jeans",
-      image: "https://via.placeholder.com/150",
+      image: jeans,
       rating: 4.6,
       price: 50,
     },
@@ -62,7 +70,7 @@ const productsData = {
       id: 6,
       name: "Jacket",
       description: "Warm winter jacket",
-      image: "https://via.placeholder.com/150",
+      image: jecket,
       rating: 4.8,
       price: 100,
     },
@@ -72,7 +80,7 @@ const productsData = {
       id: 7,
       name: "Refrigerator",
       description: "Energy-efficient refrigerator",
-      image: "https://via.placeholder.com/150",
+      image: ref,
       rating: 4.5,
       price: 800,
     },
@@ -80,7 +88,7 @@ const productsData = {
       id: 8,
       name: "Microwave",
       description: "Compact microwave oven",
-      image: "https://via.placeholder.com/150",
+      image: ovan,
       rating: 4.4,
       price: 150,
     },
@@ -88,7 +96,7 @@ const productsData = {
       id: 9,
       name: "Washing Machine",
       description: "Fully automatic washing machine",
-      image: "https://via.placeholder.com/150",
+      image: wash,
       rating: 4.6,
       price: 700,
     },
