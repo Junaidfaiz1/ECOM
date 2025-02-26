@@ -1,8 +1,10 @@
+import { Favorite } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cart: [],
   totalprice: 0,
+  Favourites: [],
 };
 
 export const cartSlice = createSlice({
@@ -50,8 +52,25 @@ export const cartSlice = createSlice({
       state.cart = [];
       state.totalprice = 0;
     },
+
+    toggleFavourite: (state, action) => {
+      const favouriteProduct = action.payload;
+      const existingFavourite = state.Favourites.findIndex(
+        (item) => item.id == favouriteProduct.id
+      );
+
+      if (existingFavourite === -1) {
+        state.Favourites.push(favouriteProduct);
+      } else {
+        const removeFavouriteItem = state.Favourites.filter(
+          (f) => f.id !== action.payload.id
+        );
+        state.Favourites = removeFavouriteItem;
+      }
+    },
   },
 });
 
-export const { cleanCart, addToCart, removeFromCart } = cartSlice.actions;
+export const { cleanCart, addToCart, removeFromCart, toggleFavourite } =
+  cartSlice.actions;
 export default cartSlice.reducer;

@@ -15,14 +15,14 @@ import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Popup from "./Popup";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [open, setOpen] = React.useState(false);
 
-  const handleDialogOpen = ()=>{
+  const handleDialogOpen = () => {
     setOpen(!open);
-  }
+  };
 
- 
   return (
     <Grid
       sx={{
@@ -63,7 +63,19 @@ const Home = () => {
           >
             <Button color="inherit">Home</Button>
             <Button color="inherit">About Us</Button>
-            <Button color="inherit">Shop</Button>
+
+            <Link
+              to="/Favourite"
+              style={{
+                textDecoration: "none",
+                justifyContent: "center",
+                color: "white",
+                fontWeight: "bold",
+                marginTop: "8px",
+              }}
+            >
+              Favourite Products
+            </Link>
           </Box>
           <IconButton
             variant="contained"

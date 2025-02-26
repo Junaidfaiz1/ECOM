@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../Redex-toolkit/AddTOCart";
+import {
+  addToCart,
+  removeFromCart,
+  toggleFavourite,
+} from "../Redex-toolkit/AddTOCart";
 import phone from "../assets/mobile.jpg";
 import laptop from "../assets/laptop.jpg";
 import watch from "../assets/Smartwatch.jpg";
@@ -10,6 +14,9 @@ import jecket from "../assets/jecket.jpg";
 import ovan from "../assets/ovan.jpg";
 import ref from "../assets/ref.jpg";
 import wash from "../assets/wash.jpg";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import {
   Typography,
   Box,
@@ -20,6 +27,7 @@ import {
   CardContent,
   CardMedia,
   Rating,
+  IconButton,
 } from "@mui/material";
 
 const productsData = {
@@ -108,7 +116,11 @@ const Products = () => {
   const despatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const cartid = cart.map((item) => item.id);
-  console.log(cartid);
+
+  const favouriteproduct = useSelector((state) => state.cart.Favourites);
+
+  const favouriteid = favouriteproduct.map((item) => item.id);
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
@@ -178,6 +190,19 @@ const Products = () => {
               <CardContent>
                 <Typography variant="h6" align="center" fontWeight="bold">
                   {product.name}
+                  <IconButton
+                    onClick={() => {
+                      despatch(toggleFavourite(product));
+                    }}
+                    sx={{ marginLeft: "2px", color: "#E67E22" }}
+                    alt="Favourite Product"
+                  >
+                    {favouriteid.includes(product.id) ? (
+                      <FavoriteIcon />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )}
+                  </IconButton>
                 </Typography>
                 <Typography
                   variant="body2"

@@ -7,7 +7,7 @@ const Home = lazy(() => import("./Components/Home.jsx"));
 const Products = lazy(() => import("./Components/Products.jsx"));
 const Footer = lazy(() => import("./Components/Footer.jsx"));
 const Testimonial = lazy(() => import("./Components/Testimonial.jsx"));
-
+const Favorite = lazy(() => import("./Components/Favourite.jsx"));
 const AboutUs = lazy(() => import("./Components/AboutUs.jsx"));
 
 const Layout = () => {
@@ -34,6 +34,7 @@ function App() {
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/Testimonial" element={<Testimonial />} />
             <Route path="/Footer" element={<Footer />} />
+            <Route path="/Favourite" element={<Favorite />} />
             <Route />
           </Routes>
         </Suspense>
