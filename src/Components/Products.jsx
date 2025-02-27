@@ -7,7 +7,7 @@ import {
 } from "../Redex-toolkit/AddTOCart";
 import phone from "../assets/mobile.jpg";
 import laptop from "../assets/laptop.jpg";
-import watch from "../assets/Smartwatch.jpg";
+import watch from "../assets/smartwatch.jpg";
 import cloth from "../assets/Tshirt.jpg";
 import jeans from "../assets/jeans.jpg";
 import jecket from "../assets/jecket.jpg";
